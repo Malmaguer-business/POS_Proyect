@@ -2,7 +2,7 @@
 
     class HomeController {
         public function main() {
-            require_once '../app/views/home/main.php';
+            require_once '../app/views/home/mainpage.php';
         }
     }
 
