@@ -1,0 +1,249 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* HEADER */
+.pos-header {
+    background-color: #333;
+    color: white;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pos-user {
+    font-size: 0.95rem;
+}
+
+.role {
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+}
+
+/* MAIN CONTAINER */
+.pos-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    height: calc(100vh - 60px);
+}
+
+/* SALE AREA */
+.sale-area {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sale-area h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.sale-list {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 1rem;
+    background-color: #fafafa;
+}
+
+.sale-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    gap: 1rem;
+    padding: 0.75rem;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+}
+
+.sale-item:last-child {
+    border-bottom: none;
+}
+
+.sale-item .name {
+    font-weight: 500;
+}
+
+.sale-item .qty {
+    text-align: center;
+}
+
+.sale-item .price,
+.sale-item .subtotal {
+    text-align: right;
+}
+
+.remove-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 0.8rem;
+}
+
+.remove-btn:hover {
+    background-color: #c82333;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #999;
+    padding: 2rem;
+}
+
+.sale-total {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid #333;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: right;
+}
+
+/* SIDE PANEL */
+.side-panel {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.side-panel h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-section label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.input-section input {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.input-section input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.search-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.search-btn:hover {
+    background-color: #0056b3;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 0.5rem 0;
+}
+
+.action-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.action-btn:hover {
+    background-color: #218838;
+}
+
+.action-btn.cancel {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.action-btn.cancel:hover {
+    background-color: #e0a800;
+}
+
+.payment-method {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.payment-method label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.payment-method select {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.admin-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-top: auto;
+}
+
+.admin-btn:hover {
+    background-color: #5a6268;
+}

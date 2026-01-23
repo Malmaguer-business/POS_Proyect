@@ -1,5 +1,6 @@
 <?php
-echo password_hash("WordP@ss123", PASSWORD_DEFAULT);
+    session_start();
+
     $controller = $_GET['c'] ?? 'auth';
     $action = $_GET['a'] ?? 'loadLogin';
 

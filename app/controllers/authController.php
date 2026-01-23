@@ -27,7 +27,6 @@
                 return;
             }
 
-            session_start();
             unset($usuario['contra']);
             $_SESSION['usuario'] = $usuario;
             header("Location: index.php?c=home&a=main");
