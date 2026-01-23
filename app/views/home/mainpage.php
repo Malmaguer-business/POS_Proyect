@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POS - Sistema de Ventas</title>
     <link rel="stylesheet" href="../app/views/home/mainpage.css">
+    <script src="../app/views/home/mainpage.js"></script>
 </head>
 <body>
     <?php
@@ -30,29 +31,12 @@
             <h2>Venta actual</h2>
 
             <div class="sale-list">
-                <!-- Ejemplo con productos -->
-                <div class="sale-item">
-                    <span class="name">Coca Cola 600ml</span>
-                    <span class="qty">x2</span>
-                    <span class="price">$18.00</span>
-                    <span class="subtotal">$36.00</span>
-                    <button class="remove-btn">✕</button>
-                </div>
-
-                <div class="sale-item">
-                    <span class="name">Sabritas Clásicas</span>
-                    <span class="qty">x1</span>
-                    <span class="price">$15.00</span>
-                    <span class="subtotal">$15.00</span>
-                    <button class="remove-btn">✕</button>
-                </div>
-
-                <!-- Si está vacío mostrar esto: -->
-                <!-- <div class="empty-cart">No hay productos en la venta</div> -->
+                <!-- Vacío inicialmente -->
+                <div class="empty-cart">No hay productos en la venta</div>
             </div>
 
             <div class="sale-total">
-                Total: <span>$51.00</span>
+                Total: <span>$0.00</span>
             </div>
         </section>
 
@@ -62,26 +46,14 @@
 
             <!-- BÚSQUEDA MANUAL -->
             <div class="input-section">
-                <label for="search">🔍 Buscar producto</label>
-                <input 
-                    type="text" 
-                    id="search" 
-                    placeholder="Nombre del producto"
-                >
-                <button class="search-btn">Buscar</button>
-            </div>
-
-            <hr class="divider">
-
-            <!-- CÓDIGO DE BARRAS -->
-            <div class="input-section">
                 <label for="barcode">📦 Código de barras</label>
                 <input 
                     type="text" 
                     id="barcode" 
-                    placeholder="Escanea el producto"
+                    placeholder="Ejemplo: M-0019-A"
                     autofocus
                 >
+                <button class="search-btn">Buscar producto</button>
             </div>
 
             <hr class="divider">
