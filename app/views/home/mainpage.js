@@ -170,3 +170,46 @@ document.addEventListener("DOMContentLoaded", function() {
             
             document.querySelector('.sale-total span').textContent = `$${total.toFixed(2)}`;
         }
+
+        // ============================================
+    // PROCESAR VENTA
+    // ============================================
+    async function procesarVenta() {
+        const metodoPago = document.getElementById('payment').value;
+        const total = carrito.reduce((sum, item) => sum + item.subtotal, 0);
+    
+        // Confirmar venta
+        if (!confirm(`¿Procesar venta de $${total.toFixed(2)} con ${metodoPago}?`)) {
+            return;
+        }
+    
+        try {
+            const response = await fetch('index.php?c=venta&a=registrarVenta', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    metodo_pago: metodoPago,
+                    productos: carrito.map(item => ({
+                        producto_id: item.id,
+                        nombre: item.nombre,
+                        cantidad: item.cantidad,
+                        precio_unitario: item.precio
+                    }))
+                })
+            });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            alert(`Venta registrada exitosamente\nTotal: $${total.toFixed(2)}`);
+            cancelarVenta(); // Limpiar carrito
+        } else {
+            alert(data.message || 'Error al procesar la venta');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error al procesar la venta');
+    }
+}

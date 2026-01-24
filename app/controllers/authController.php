@@ -2,7 +2,7 @@
 
     require_once '../app/models/authModel.php';
 
-    class AuthController {
+    class authController {
 
         public function loadLogin() {
             require_once '../app/views/auth/login.php';
