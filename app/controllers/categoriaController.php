@@ -68,6 +68,48 @@
                 echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
             }
         }
+
+        public function editar() {
+            $id = $_GET['id'] ?? '';
+            if (empty($id)) {
+                header('Location: index.php?c=categoria&a=listar');
+                exit();
+            }
+
+            $categoria = $this->categoriaModel->seleccionarCatgeoria($id);
+            if (!$categoria) {
+                header('Location: index.php?c=categoria&a=listar');
+                exit();
+            }
+
+            require_once '../app/views/admin/categoria/editar.php';
+        }
+
+        public function actualizar() {
+            header('Content-Type: application/json');
+
+            $id = $_POST['id'] ?? '';
+            $nombre = $_POST['nombre'] ?? '';
+            $descripcion = $_POST['descripcion'] ?? '';
+
+            if (empty($id) || empty($nombre) || empty($descripcion)) {
+                echo json_encode(['success' => false, 'message' => 'Error. Datos incompletos.']);
+                return;
+            }
+
+            try {
+                $resultado = $this->categoriaModel->editar($id, $nombre, $descripcion);
+
+                if ($resultado) {
+                    echo json_encode(['success' => true, 'message' => 'Categoría actualizada exitosamente.']);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Error al actualizar la categoría.']);
+                }
+
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
     }
 
 ?>

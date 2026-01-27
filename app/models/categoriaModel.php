@@ -23,6 +23,20 @@
             $stmt->close();
             return $resultado;
         }
+
+        public function seleccionarCatgeoria($id) {
+            $stmt = $this->conn->prepare("CALL sp_seleccionar_categoria(?)");
+            $stmt->bind_param("s", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_assoc();
+        }
+
+        public function editar($id, $nombre, $descripcion) {
+            $stmt = $this->conn->prepare("CALL sp_editar_categoria(?, ?, ?)");
+            $stmt->bind_param("sss", $id, $nombre, $descripcion);
+            return $stmt->execute();
+        }
     }
 
 ?>

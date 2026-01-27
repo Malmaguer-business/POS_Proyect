@@ -62,14 +62,6 @@
                     <span class="btn-icon">📋</span>
                     <span class="btn-text">Ver todas</span>
                 </button>
-                <button class="admin-btn btn-categorias" onclick="location.href='index.php?c=categoria&a=editar'">
-                    <span class="btn-icon">✏️</span>
-                    <span class="btn-text">Editar</span>
-                </button>
-                <button class="admin-btn btn-categorias" onclick="location.href='index.php?c=categoria&a=eliminar'">
-                    <span class="btn-icon">🗑️</span>
-                    <span class="btn-text">Eliminar</span>
-                </button>
             </div>
         </section>
 

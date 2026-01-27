@@ -1,5 +1,5 @@
-// Validación y submit del formulario
-document.getElementById('categoriaForm').addEventListener('submit', async function(e) {
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('categoriaForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
     const nombre = document.getElementById('nombre').value.trim();
@@ -40,7 +40,7 @@ document.getElementById('categoriaForm').addEventListener('submit', async functi
         mostrarAlerta('Error de conexión', 'error');
     }
 });
-
+ });
 function mostrarAlerta(mensaje, tipo) {
     const alert = document.getElementById('alert');
     alert.textContent = mensaje;
