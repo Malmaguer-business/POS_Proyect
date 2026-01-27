@@ -75,7 +75,7 @@
 
             <!-- SOLO ADMIN -->
              <?php if($rol == 1): ?>
-                <button class="admin-btn">⚙️ Operaciones admin</button>
+                <button onclick= "location.href='index.php?c=admin&a=dashboard'" class="admin-btn">⚙️ Operaciones admin</button>
             <?php endif; ?>
         </aside>
 

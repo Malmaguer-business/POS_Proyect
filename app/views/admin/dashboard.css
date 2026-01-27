@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* HEADER */
+.admin-header {
+    background-color: #333;
+    color: white;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-header h1 {
+    font-size: 1.3rem;
+}
+
+.back-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    background-color: #0056b3;
+}
+
+/* MAIN CONTAINER */
+.admin-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* SECTION */
+.admin-section {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #eee;
+}
+
+.section-header .icon {
+    font-size: 1.5rem;
+}
+
+.section-header h2 {
+    font-size: 1.3rem;
+    color: #333;
+}
+
+/* BUTTON GRID */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.admin-btn {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.admin-btn:hover {
+    border-color: #007bff;
+    background-color: #f0f8ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.admin-btn .btn-icon {
+    font-size: 1.5rem;
+}
+
+.admin-btn .btn-text {
+    font-weight: 500;
+    color: #333;
+}
+
+/* COLOR VARIATIONS */
+.btn-productos:hover {
+    border-color: #28a745;
+    background-color: #f0fff4;
+}
+
+.btn-categorias:hover {
+    border-color: #ffc107;
+    background-color: #fffbf0;
+}
+
+.btn-usuarios:hover {
+    border-color: #6f42c1;
+    background-color: #f8f5ff;
+}
+
+.btn-ventas:hover {
+    border-color: #17a2b8;
+    background-color: #f0fcff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .button-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .button-grid {
+        grid-template-columns: 1fr;
+    }
+}
