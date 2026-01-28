@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // ============================================
         async function buscarProductoPorCodigo(codigo) {
     try {
-        const response = await fetch('index.php?c=product&a=buscarPorCodigo', {
+        const response = await fetch('index.php?c=producto&a=buscarPorCodigo', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',

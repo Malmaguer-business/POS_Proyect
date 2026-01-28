@@ -37,6 +37,13 @@
             $stmt->bind_param("sss", $id, $nombre, $descripcion);
             return $stmt->execute();
         }
+
+        public function obtenerActivas() {
+            $stmt = $this->conn->prepare("CALL sp_categorias_activas()");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
     }
 
 ?>

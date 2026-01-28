@@ -28,7 +28,7 @@
                     <span class="btn-icon">➕</span>
                     <span class="btn-text">Agregar</span>
                 </button>
-                <button class="admin-btn btn-productos" onclick="location.href='index.php?c=producto&a=listar'">
+                <button class="admin-btn btn-productos" onclick="location.href='index.php?c=producto&a=gestionar'">
                     <span class="btn-icon">📋</span>
                     <span class="btn-text">Ver todos</span>
                 </button>
