@@ -36,6 +36,20 @@
             $stmt->bind_param("si", $id, $estatus);
             return $stmt->execute();
         
-            }
+        }
+
+        public function obtenerPorId($id) {
+            $stmt = $this->conn->prepare("CALL sp_seleccionar_producto(?)");
+            $stmt->bind_param("s", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_assoc();
+        }
+
+        public function editar($id, $nombre, $descripcion, $precio, $stockMinimo, $imagenUrl, $categoriaId) {
+            $stmt = $this->conn->prepare("CALL sp_editar_producto(?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssddss", $id, $nombre, $descripcion, $precio, $stockMinimo, $imagenUrl, $categoriaId);
+            return $stmt->execute();
+        }
     }
 ?>
