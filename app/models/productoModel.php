@@ -51,5 +51,17 @@
             $stmt->bind_param("sssddss", $id, $nombre, $descripcion, $precio, $stockMinimo, $imagenUrl, $categoriaId);
             return $stmt->execute();
         }
+
+        public function aumentarStock($id, $cantidad) {
+            $stmt = $this->conn->prepare("CALL sp_aumentar_stock(?, ?)");
+            $stmt->bind_param("si", $id, $cantidad);
+            return $stmt->execute();
+        }
+
+        public function disminuirStock($id, $cantidad) {
+            $stmt = $this->conn->prepare("CALL sp_disminuir_stock(?, ?)");
+            $stmt->bind_param("si", $id, $cantidad);
+            return $stmt->execute();
+        }
     }
 ?>

@@ -159,6 +159,89 @@
                 echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
             }
         }
+
+        public function ajustarStock() {
+            $id = $_GET['id'] ?? '';
+    
+            if (empty($id)) {
+                header('Location: index.php?c=producto&a=gestionar');
+                exit();
+            }
+    
+            // Obtener datos del producto
+            $producto = $this->productoModel->obtenerPorId($id);
+    
+            if (!$producto) {
+                header('Location: index.php?c=producto&a=gestionar');
+                exit();
+            }
+    
+            require_once '../app/views/admin/producto/ajustarStock.php';
+        }
+
+        public function modificarStock() {
+            header('Content-Type: application/json');
+    
+            $id = $_POST['id'] ?? '';
+            $cantidad = $_POST['cantidad'] ?? 0;
+            $accion = $_POST['accion'] ?? '';
+    
+            if (empty($id) || $cantidad <= 0 || !in_array($accion, ['aumentar', 'disminuir'])) {
+                echo json_encode(['success' => false, 'message' => 'Datos inválidos']);
+                return;
+            }
+    
+            try {
+                if ($accion === 'aumentar') {
+                    $resultado = $this->productoModel->aumentarStock($id, $cantidad);
+                } else {
+                    // Verificar que haya suficiente stock antes de disminuir
+                    $stockActual = $this->productoModel->obtenerPorId($id);
+                    if ($stockActual['stock'] < $cantidad) {
+                        echo json_encode(['success' => false, 'message' => 'Stock insuficiente para disminuir esa cantidad']);
+                        return;
+                    }
+                    $resultado = $this->productoModel->disminuirStock($id, $cantidad);
+                }
+        
+                if ($resultado) {
+                    echo json_encode(['success' => true, 'message' => 'Stock actualizado']);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Error al actualizar el stock']);
+                }
+        
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
+
+        public function obtenerStock() {
+            header('Content-Type: application/json');
+    
+            $id = $_GET['id'] ?? '';
+    
+            if (empty($id)) {
+                echo json_encode(['success' => false, 'message' => 'ID no proporcionado']);
+                return;
+            }
+    
+            try {
+                $stock = $this->productoModel->obtenerPorId($id);
+        
+                if ($stock) {
+                    echo json_encode([
+                        'success' => true,
+                        'stock' => $stock['stock'],
+                        'stock_minimo' => $stock['stock_minimo']
+                    ]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Producto no encontrado']);
+                }
+        
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
     }
 
 ?>

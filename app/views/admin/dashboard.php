@@ -32,18 +32,6 @@
                     <span class="btn-icon">📋</span>
                     <span class="btn-text">Ver todos</span>
                 </button>
-                <button class="admin-btn btn-productos" onclick="location.href='index.php?c=producto&a=editar'">
-                    <span class="btn-icon">✏️</span>
-                    <span class="btn-text">Editar</span>
-                </button>
-                <button class="admin-btn btn-productos" onclick="location.href='index.php?c=producto&a=eliminar'">
-                    <span class="btn-icon">🗑️</span>
-                    <span class="btn-text">Eliminar</span>
-                </button>
-                <button class="admin-btn btn-productos" onclick="location.href='index.php?c=producto&a=ajustarStock'">
-                    <span class="btn-icon">📊</span>
-                    <span class="btn-text">Ajustar Stock</span>
-                </button>
             </div>
         </section>
 
