@@ -64,21 +64,9 @@
                     <span class="btn-icon">➕</span>
                     <span class="btn-text">Registrar</span>
                 </button>
-                <button class="admin-btn btn-usuarios" onclick="location.href='index.php?c=usuario&a=listar'">
+                <button class="admin-btn btn-usuarios" onclick="location.href='index.php?c=usuario&a=gestionar'">
                     <span class="btn-icon">📋</span>
                     <span class="btn-text">Ver todos</span>
-                </button>
-                <button class="admin-btn btn-usuarios" onclick="location.href='index.php?c=usuario&a=editar'">
-                    <span class="btn-icon">✏️</span>
-                    <span class="btn-text">Editar</span>
-                </button>
-                <button class="admin-btn btn-usuarios" onclick="location.href='index.php?c=usuario&a=eliminar'">
-                    <span class="btn-icon">🗑️</span>
-                    <span class="btn-text">Eliminar</span>
-                </button>
-                <button class="admin-btn btn-usuarios" onclick="location.href='index.php?c=usuario&a=miPerfil'">
-                    <span class="btn-icon">👤</span>
-                    <span class="btn-text">Mi Perfil</span>
                 </button>
             </div>
         </section>

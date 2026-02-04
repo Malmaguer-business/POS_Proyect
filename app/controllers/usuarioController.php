@@ -45,6 +45,40 @@
                 echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
             }
         }
+
+        public function gestionar() {
+            // Obtener todos los usuarios
+            $usuarios = $this->usuarioModel->obtenerTodos();
+    
+            // Cargar la vista
+            require_once '../app/views/admin/usuario/gestionar.php';
+        }
+
+        public function toggleEstatus() {
+            header('Content-Type: application/json');
+    
+            $id = $_POST['id'] ?? '';
+            $estatus = $_POST['estatus'] ?? '';
+    
+            if (empty($id)) {
+                echo json_encode(['success' => false, 'message' => 'ID no proporcionado']);
+                return;
+            }
+    
+            try {
+                $resultado = $this->usuarioModel->cambiarEstatus($id, $estatus);
+        
+                if ($resultado) {
+                    $mensaje = $estatus == 1 ? 'Usuario activado' : 'Usuario desactivado';
+                    echo json_encode(['success' => true, 'message' => $mensaje]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Error al actualizar']);
+                }
+        
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
     }
 
 ?>
