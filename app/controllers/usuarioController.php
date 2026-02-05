@@ -79,6 +79,56 @@
                 echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
             }
         }
+
+        public function editar() {
+            $id = $_GET['id'] ?? '';
+
+            if (empty($id)) {
+                header('Location: /admin/usuarios/gestionar');
+                exit;
+            }
+
+            $usuario = $this->usuarioModel->obtenerPorId($id);
+
+            if (!$usuario) {
+                header('Location: /admin/usuarios/gestionar');
+                exit;
+            }
+
+            require_once '../app/views/admin/usuario/editar.php';
+        }
+
+        public function actualizar() {
+            header('Content-Type: application/json');
+
+            $id = $_POST['id'] ?? '';
+            $nombre = $_POST['nombre'] ?? '';
+            $correo = $_POST['correo'] ?? '';  
+            $telefono = $_POST['telefono'] ?? '';
+            $newPassword = $_POST['new_password'] ?? '';
+
+            if(empty($id) || empty($nombre) || empty($correo) || empty($telefono)) {
+                echo json_encode(['success' => false, 'message' => 'Datos incompletos']);
+                return;
+            }
+
+            try {
+                $resultado = $this->usuarioModel->editar($id, $nombre, $correo, $telefono);
+
+                if (!empty($newPassword)) {
+                    $this->usuarioModel->actualizarContraseña($id, $newPassword);
+                }
+
+                if($resultado) {
+                    echo json_encode(['success' => true, 'message' => 'Usuario actualizado exitosamente']);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Error al actualizar el usuario']);
+                }
+
+            } catch(Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
     }
 
 ?>

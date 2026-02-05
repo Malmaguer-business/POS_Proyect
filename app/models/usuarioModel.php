@@ -41,6 +41,19 @@
             $stmt->bind_param("si", $id, $estatus);
             return $stmt->execute();
         }
+
+        public function editar($id, $nombre, $correo, $telefono) {
+            $stmt = $this->conn->prepare("CALL sp_editar_usuario(?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $id, $nombre, $correo, $telefono);
+            return $stmt->execute();
+        }
+
+        public function actualizarContraseña($id, $password) {
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $this->conn->prepare("CALL sp_actualizar_contraseña(?, ?)");
+            $stmt->bind_param("ss", $id, $passwordHash);
+            return $stmt->execute();
+        }
     }
 
 ?>
