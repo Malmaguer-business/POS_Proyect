@@ -132,5 +132,53 @@
                 echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
             }
         }
+
+        public function reportes() {
+            require_once '../app/views/admin/venta/reportes.php';
+        }
+
+        public function reporteResumen() {
+            header('Content-Type: application/json');
+    
+            try {
+                $resumen = $this->ventaModel->reporteResumen();
+                echo json_encode(['success' => true, 'resumen' => $resumen]);
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
+
+        public function reporteTopProductos() {
+            header('Content-Type: application/json');
+    
+            try {
+                $productos = $this->ventaModel->reporteTopProductos(5);
+                echo json_encode(['success' => true, 'productos' => $productos]);
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
+
+        public function reporteMetodosPago() {
+            header('Content-Type: application/json');
+    
+            try {
+                $metodos = $this->ventaModel->reporteMetodosPago();
+                echo json_encode(['success' => true, 'metodos' => $metodos]);
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
+
+        public function reporteRendimientoEmpleados() {
+            header('Content-Type: application/json');
+    
+            try {
+                $empleados = $this->ventaModel->reporteRendimientoEmpleados();
+                echo json_encode(['success' => true, 'empleados' => $empleados]);
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
     }
 ?>

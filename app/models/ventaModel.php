@@ -69,6 +69,59 @@
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
+        public function reporteResumen() {
+            $stmt = $this->conn->prepare("CALL sp_reporte_resumen_general()");
+            $stmt->execute();
+    
+            // Obtener resultados de los 4 SELECTs
+            $result1 = $stmt->get_result();
+            $ventasHoy = $result1->fetch_assoc();
+    
+            $stmt->next_result();
+            $result2 = $stmt->get_result();
+            $ventasMes = $result2->fetch_assoc();
+    
+            $stmt->next_result();
+            $result3 = $stmt->get_result();
+            $productoMasVendido = $result3->fetch_assoc();
+    
+            $stmt->next_result();
+            $result4 = $stmt->get_result();
+            $stockBajo = $result4->fetch_assoc();
+    
+            return [
+                'ventas_hoy' => $ventasHoy['ventas_hoy'] ?? 0,
+                'ingresos_hoy' => $ventasHoy['ingresos_hoy'] ?? 0,
+                'ventas_mes' => $ventasMes['ventas_mes'] ?? 0,
+                'ingresos_mes' => $ventasMes['ingresos_mes'] ?? 0,
+                'producto_mas_vendido' => $productoMasVendido['producto_nombre'] ?? 'N/A',
+                'cantidad_vendida' => $productoMasVendido['cantidad_vendida'] ?? 0,
+                'productos_stock_bajo' => $stockBajo['productos_stock_bajo'] ?? 0
+            ];
+        }
+
+        public function reporteTopProductos($limite = 5) {
+            $stmt = $this->conn->prepare("CALL sp_reporte_top_productos(?)");
+            $stmt->bind_param("i", $limite);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        public function reporteMetodosPago() {
+            $stmt = $this->conn->prepare("CALL sp_reporte_metodos_pago()");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        public function reporteRendimientoEmpleados() {
+            $stmt = $this->conn->prepare("CALL sp_reporte_rendimiento_empleados()");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
     }
 
 ?>
