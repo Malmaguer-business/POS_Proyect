@@ -37,6 +37,38 @@
             return $stmt->execute();
         }
 
+        public function buscarPorFechas($fechaInicio, $fechaFin) {
+            $stmt = $this->conn->prepare("CALL sp_ventas_por_fecha(?, ?)");
+            $stmt->bind_param("ss", $fechaInicio, $fechaFin);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        public function buscarPorUsuario($usuarioId) {
+            $stmt = $this->conn->prepare("CALL sp_ventas_por_usuario(?)");
+            $stmt->bind_param("s", $usuarioId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        public function buscarPorProducto($productoId) {
+            $stmt = $this->conn->prepare("CALL sp_ventas_por_producto(?)");
+            $stmt->bind_param("s", $productoId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        public function obtenerDetalles($ventaId) {
+            $stmt = $this->conn->prepare("CALL sp_detalles_venta(?)");
+            $stmt->bind_param("s", $ventaId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
     }
 
 ?>

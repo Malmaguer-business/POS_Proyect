@@ -1,12 +1,18 @@
 <?php
 
     require_once __DIR__ . '/../models/ventaModel.php';
+    require_once __DIR__ . '/../models/usuarioModel.php';
+    require_once __DIR__ . '/../models/productoModel.php';
 
     class ventaController {
         private $ventaModel;
+        private $usuarioModel;
+        private $productoModel;
 
         public function __construct() {
             $this->ventaModel = new ventaModel;
+            $this->usuarioModel = new usuarioModel;
+            $this->productoModel = new productoModel;
         }
 
         public function registrarVenta() {
@@ -55,5 +61,76 @@
                 return;
             }
         } 
+
+        public function historial() {
+            $usuarios = $this->usuarioModel->obtenerTodos();
+            $productos = $this->productoModel->obtenerActivos();
+            require_once '../app/views/admin/venta/historial.php';
+        }
+
+        public function buscarPorFechas() {
+            header('Content-Type: application/json');
+
+            $fechaInicio = $_GET['fecha_inicio'] ?? '';
+            $fechaFin = $_GET['fecha_fin'] ?? '';
+
+            if (empty($fechaInicio) || empty($fechaFin)) {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Fechas no proporcionadas'
+                ]);
+                return;
+            }
+
+            try {
+                $ventas = $this->ventaModel->buscarPorFechas($fechaInicio, $fechaFin);
+
+                echo json_encode([
+                    'success' => true,
+                    'ventas' => $ventas
+                ]);
+            } catch (Exception $e) {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Error al buscar ventas'
+                ]);
+            }
+        }
+
+        public function buscarPorUsuario() {
+            header('Content-Type: application/json');
+    
+            $usuarioId = $_GET['usuario_id'] ?? '';
+    
+            if (empty($usuarioId)) {
+                echo json_encode(['success' => false, 'message' => 'Usuario inválido']);
+                return;
+            }
+    
+            try {
+                $ventas = $this->ventaModel->buscarPorUsuario($usuarioId);
+                echo json_encode(['success' => true, 'ventas' => $ventas]);
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
+
+        public function buscarPorProducto() {
+            header('Content-Type: application/json');
+    
+            $productoId = $_GET['producto_id'] ?? '';
+    
+            if (empty($productoId)) {
+                echo json_encode(['success' => false, 'message' => 'Producto inválido']);
+                return;
+            }
+    
+            try {
+                $ventas = $this->ventaModel->buscarPorProducto($productoId);
+                echo json_encode(['success' => true, 'ventas' => $ventas]);
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
     }
 ?>
