@@ -34,8 +34,12 @@
         }
 
         public function logout() {
-            // Lógica para cerrar sesión
-            echo "Cerrando sesión...";
+            // Destruir la sesión
+            session_destroy();
+            
+            // Redirigir al login
+            header("Location: index.php?c=auth&a=loadLogin");
+            exit();
         }
     }
 

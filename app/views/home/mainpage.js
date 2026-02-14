@@ -54,6 +54,13 @@ document.addEventListener("DOMContentLoaded", function() {
             cancelarVenta();
         }
     });
+
+    // Event listener para botón Cerrar Sesión
+    document.querySelector('.logout-btn').addEventListener('click', function() {
+        if (confirm('¿Estás seguro de cerrar sesión?')) {
+            window.location.href = 'index.php?c=auth&a=logout';
+        }
+    });
 });
 
 // ============================================

@@ -86,10 +86,6 @@
                     <span class="btn-icon">📊</span>
                     <span class="btn-text">Reportes</span>
                 </button>
-                <button class="admin-btn btn-ventas" onclick="location.href='index.php?c=venta&a=detalles'">
-                    <span class="btn-icon">🔍</span>
-                    <span class="btn-text">Ver Detalles</span>
-                </button>
             </div>
         </section>
 
