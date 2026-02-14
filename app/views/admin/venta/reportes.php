@@ -52,6 +52,14 @@
             </div>
         </section>
 
+        <!-- PRODUCTOS CON STOCK BAJO -->
+        <section class="section">
+            <h2 class="section-title">⚠️ Productos con Stock Bajo</h2>
+            <div id="tablaStockBajo">
+                <div class="loading">Cargando...</div>
+            </div>
+        </section>
+
     </main>
 </body>
 </html>

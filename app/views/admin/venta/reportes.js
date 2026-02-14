@@ -6,6 +6,7 @@ let chartTopProductos = null;
             cargarTopProductos();
             cargarMetodosPago();
             cargarRendimientoEmpleados();
+            cargarProductosStockBajo();
         });
 
         // RESUMEN GENERAL
@@ -199,5 +200,71 @@ let chartTopProductos = null;
                 }
             } catch (error) {
                 console.error('Error:', error);
+            }
+        }
+
+        // PRODUCTOS CON STOCK BAJO
+        async function cargarProductosStockBajo() {
+            try {
+                const response = await fetch('index.php?c=venta&a=reporteProductosStockBajo');
+                const data = await response.json();
+
+                if (data.success) {
+                    if (data.productos.length > 0) {
+                        let html = `
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>Stock Actual</th>
+                                        <th>Stock Mínimo</th>
+                                        <th>Unidades Faltantes</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        `;
+
+                        data.productos.forEach(prod => {
+                            const porcentaje = (prod.stock_actual / prod.stock_minimo) * 100;
+                            let estadoClass = 'stock-critico';
+                            let estadoTexto = 'CRÍTICO';
+                            
+                            if (porcentaje > 50) {
+                                estadoClass = 'stock-bajo';
+                                estadoTexto = 'BAJO';
+                            } else if (porcentaje <= 25) {
+                                estadoClass = 'stock-critico';
+                                estadoTexto = 'CRÍTICO';
+                            } else if (porcentaje <= 50) {
+                                estadoClass = 'stock-muy-bajo';
+                                estadoTexto = 'MUY BAJO';
+                            }
+
+                            html += `
+                                <tr>
+                                    <td><strong>${prod.nombre}</strong></td>
+                                    <td style="font-weight: 600; color: #dc3545;">${prod.stock_actual}</td>
+                                    <td>${prod.stock_minimo}</td>
+                                    <td style="color: #856404;">${prod.unidades_faltantes}</td>
+                                    <td><span class="alert-badge ${estadoClass}">${estadoTexto}</span></td>
+                                </tr>
+                            `;
+                        });
+
+                        html += '</tbody></table>';
+                        document.getElementById('tablaStockBajo').innerHTML = html;
+                    } else {
+                        document.getElementById('tablaStockBajo').innerHTML = `
+                            <div style="text-align: center; padding: 2rem; color: #28a745;">
+                                <div style="font-size: 3rem; margin-bottom: 1rem;">✅</div>
+                                <div style="font-size: 1.2rem; font-weight: 600;">¡Todos los productos tienen stock suficiente!</div>
+                            </div>
+                        `;
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('tablaStockBajo').innerHTML = '<div class="loading">Error al cargar datos</div>';
             }
         }

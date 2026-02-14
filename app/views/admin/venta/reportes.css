@@ -165,6 +165,31 @@
             font-weight: 500;
         }
 
+        .alert-badge.stock-bajo {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .alert-badge.stock-muy-bajo {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .alert-badge.stock-critico {
+            background-color: #dc3545;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
+
         .loading {
             text-align: center;
             padding: 2rem;

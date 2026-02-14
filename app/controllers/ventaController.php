@@ -180,5 +180,51 @@
                 echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
             }
         }
+
+        public function reporteProductosStockBajo() {
+            header('Content-Type: application/json');
+    
+            try {
+                $productos = $this->ventaModel->reporteProductosStockBajo();
+                echo json_encode(['success' => true, 'productos' => $productos]);
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
+
+        public function detalles() {
+            require_once '../app/views/admin/venta/detalles.php';
+        }
+
+        public function obtenerDetallesVenta() {
+            header('Content-Type: application/json');
+    
+            $ventaId = $_GET['id'] ?? '';
+    
+            if (empty($ventaId)) {
+                echo json_encode(['success' => false, 'message' => 'ID de venta inválido']);
+                return;
+            }
+    
+            try {
+                // Obtener información de la venta
+                $venta = $this->ventaModel->obtenerVentaPorId($ventaId);
+                
+                // Obtener detalles de productos
+                $detalles = $this->ventaModel->obtenerDetalles($ventaId);
+    
+                if ($venta) {
+                    echo json_encode([
+                        'success' => true, 
+                        'venta' => $venta,
+                        'detalles' => $detalles
+                    ]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Venta no encontrada']);
+                }
+            } catch (Exception $e) {
+                echo json_encode(['success' => false, 'message' => 'Error: ' . $e->getMessage()]);
+            }
+        }
     }
 ?>

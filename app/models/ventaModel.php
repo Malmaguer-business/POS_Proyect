@@ -122,6 +122,21 @@
             return $result->fetch_all(MYSQLI_ASSOC);
         }
 
+        public function reporteProductosStockBajo() {
+            $stmt = $this->conn->prepare("CALL sp_reporte_productos_stock_bajo()");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+        public function obtenerVentaPorId($ventaId) {
+            $stmt = $this->conn->prepare("CALL sp_obtener_venta_por_id(?)");
+            $stmt->bind_param("s", $ventaId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_assoc();
+        }
+
     }
 
 ?>
